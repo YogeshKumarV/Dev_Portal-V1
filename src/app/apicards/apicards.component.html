@@ -1,0 +1,60 @@
+@if(isShowParent){
+<div class="container-fluid">
+    @if(isShowNoApisCard){
+    <div class="d-flex justify-content-center align-items-center no-api-card">
+        <div class="col-sm-4">
+            <div class="noapi-card d-flex flex-column align-items-center justify-content-center">
+                <img src="../../assets/images/Page-1.svg" width="120px" height="120px" />
+                <h3 class="create-head">No API's yet.!</h3>
+                <p class="create-para">Create an API here</p>
+                <button class="btn btn-outline-primary" (click)="goToCreateApi()">Create API</button>
+            </div>
+        </div>
+    </div>
+    }
+    @else{
+    <div class="row mt-3">
+        <div class="col-sm-12 d-flex justify-content-end">
+            <button class="btn btn-outline-primary" (click)="goToCreateApi()">Create API</button>
+        </div>
+    </div>
+    <div class="row pt-3 g-3 row-size">
+        @for(item of endpointCards; track item.id){
+        <div class="col-sm-3">
+            <div class="api-card">
+                <div class="api-card-above d-flex justify-content-center align-items-center"
+                    (click)="goToApiViewPage(item)">
+                    <img src="../../assets/images/Group.svg" />
+                </div>
+                <div class="api-card-below">
+                    <div class="status-row">
+                        <button class="status-button">{{item.status || 'created'}}</button>
+                        <p class="createdBy"> by {{item.createdBy}}</p>
+                    </div>
+
+                    <div class="d-flex mt-3 ">
+                        <p>Context Path: </p>&nbsp;&nbsp;
+                        <!-- <button class="status-button">{{item.endpoint}}</button> -->
+                        <p class="endpoint-name">&nbsp;{{item.endpoint}}&nbsp;</p>
+                    </div>
+                    <!-- <p class="createdBy">by admin</p> -->
+
+                    <!-- <div class="d-flex">
+                        <button class="deploy-btn d-flex align-items-center" (click)="goToDeploymentPage(item)"><span
+                                class="d-flex align-items-center"><mat-icon
+                                    class="material-symbols-outlined profile-icon-size">deployed_code</mat-icon></span><span>Deploy</span></button>
+                        <button class="delete-btn d-flex align-items-center" (click)="deleteEndpoint(item.id)"><span
+                                class="d-flex align-items-center"><mat-icon
+                                    class="material-symbols-outlined profile-icon-size">delete</mat-icon></span><span>Delete</span></button>
+                    </div> -->
+                </div>
+
+            </div>
+        </div>
+        }
+    </div>
+    }
+</div>
+}@else{
+<router-outlet></router-outlet>
+}

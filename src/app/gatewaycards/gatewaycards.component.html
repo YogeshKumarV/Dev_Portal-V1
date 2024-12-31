@@ -1,0 +1,42 @@
+@if(isShowParent){
+<div class="container-fluid">
+    @if(isShowNoGatewayCard){
+        <div class="d-flex justify-content-center align-items-center no-api-card">
+            <div class="col-sm-4">
+                <div class="noapi-card d-flex flex-column align-items-center justify-content-center">
+                    <img src="../../assets/images/Page-1.svg" width="120px" height="120px"/>
+                    <h3 class="create-head">No Gateways's yet.!</h3>
+                    <p class="create-para">Create an Gateway here</p>
+                    <button class="btn btn-outline-primary" (click)="goToCreateGateway()">Create Gateway</button>
+                </div>
+            </div>
+        </div>
+    }
+        @else{
+    <div class="row mt-3">
+        <div class="col-sm-12 d-flex justify-content-end">
+            <button class="btn btn-outline-primary" (click)="goToCreateGateway()">Create Gateway</button>
+        </div>
+    </div>
+    <div class="row pt-3 g-3 row-size">
+        @for(item of gatewaysCards; track item.id){
+        <div class="col-sm-3">
+            <div class="api-card">
+                <div class="api-card-above d-flex justify-content-center align-items-center" (click)="goToGatewayViewPage(item.id)">
+                    <img src="../../assets/images/logo-krakend.svg" />
+                </div>
+                <div class="api-card-below">
+                    <h3>{{item.name}}</h3>
+                    <p>Running on : {{item.port}}</p>
+                    
+                </div>
+
+            </div>
+        </div>
+        }
+    </div>
+        }
+</div>
+}@else{
+<router-outlet></router-outlet>
+}

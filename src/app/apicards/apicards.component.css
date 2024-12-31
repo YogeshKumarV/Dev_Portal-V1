@@ -1,0 +1,117 @@
+.noapi-card {
+    height: 400px;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.27);
+    border-radius: 12px;
+}
+
+.create-para {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.56);
+}
+
+.create-head {
+    font-size: 25px;
+    margin-top: 20px;
+}
+
+.no-api-card {
+    height: 80vh;
+}
+
+.api-card {
+    height: 300px;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    /* cursor: pointer; */
+    /* width:290px; */
+
+    /* padding:20px; */
+}
+
+.api-card-above {
+    height: 60%;
+    cursor: pointer;
+    border: 1px solid black;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background: linear-gradient(to bottom, rgba(6, 68, 119, 1), rgba(11, 126, 221, 1));
+}
+
+.api-card-below {
+    padding: 20px;
+}
+
+.api-card-below h2 {
+    margin-bottom: 0px;
+}
+
+.status-button {
+    height: 35px;
+    width: 150px;
+    background-color: rgba(205, 228, 243, 1);
+    color: rgba(49, 121, 165, 1);
+    border: none;
+    outline: none;
+    border-radius: 20px;
+}
+
+.deploy-btn {
+    border-radius: 8px;
+    border: 1px solid rgba(34, 123, 197, 1);
+    background-color: rgba(34, 123, 197, 1);
+    color: rgba(111, 181, 240, 1);
+    width: 100px;
+}
+
+.delete-btn {
+    border-radius: 8px;
+    border: 1px solid rgba(224, 80, 33, 1);
+    background-color: rgba(242, 85, 33, 0.52);
+    color: rgba(192, 86, 17, 1);
+    width: 100px;
+    margin-left: 20px;
+}
+
+.deploy-btn span mat-icon {
+    font-size: 20px;
+}
+
+.delete-btn span mat-icon {
+    font-size: 20px;
+}
+
+.custom {
+    flex: 0 0 19%;
+    /* Each card takes up 19% of the row */
+    max-width: 19%;
+    /* Maintain 5 cards per row */
+}
+
+.row-size {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.endpoint-name {
+    font-size: 15px;
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+.createdBy {
+    font-size: 16px;
+    /* Adjust font size as needed */
+    color: #333;
+    /* Adjust text color */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    /* Horizontal offset, vertical offset, blur radius, color */
+    margin-bottom: 0;
+}
+
+.status-row {
+    display: flex;
+    /* Enable flexbox for proper alignment */
+    justify-content: space-between;
+    /* Place items at opposite ends */
+    align-items: center;
+}

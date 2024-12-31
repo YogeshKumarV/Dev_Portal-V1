@@ -1,0 +1,69 @@
+.sidemenu {
+  background: linear-gradient(to right, rgba(5, 35, 48, 1), rgba(10, 40, 52, 0.93));
+  /* min-width:220px !important; */
+  /* height:90vh; */
+  min-height: 100vh;
+}
+
+.side-menu mat-nav-list {
+  position: fixed !important;
+}
+
+.anchor-head {
+  color: white;
+}
+
+.mat-icon-styles {
+  margin-right: 12px;
+  display: flex;
+
+}
+
+.mat-icon-styles mat-icon {
+  font-size: 20px;
+  color: white;
+}
+
+.about-api-card {
+  height: auto;
+  border-bottom: 1px solid black;
+}
+
+.about-name-section {
+  /* border-right: 1px solid black; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  /* height: 150px; */
+}
+
+
+.about-name-section1 {
+  border-right: 1px solid black;
+  display: flex;
+  padding: 8px;
+  height: 120px;
+  /* margin-left: 5px; */
+}
+
+.img-bg {
+  background-color: rgba(6, 70, 122, 1);
+
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  height: 100px;
+  width: 100px;
+}
+
+.icon-support {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.icon-support-text {
+  font-size: 30px;
+}

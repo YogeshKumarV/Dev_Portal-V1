@@ -1,0 +1,31 @@
+{
+	"components": {},
+	"info": {
+		"title": "KrakenD - API Gateway",
+		"version": ""
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/massil/discovery": {
+			"get": {
+				"operationId": "GET/massil/discovery",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						},
+						"description": "OK"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				},
+				"security": []
+			}
+		}
+	}
+}

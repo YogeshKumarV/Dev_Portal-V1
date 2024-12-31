@@ -1,0 +1,18 @@
+.url-input {
+  width: 550px;
+  border: 1px lightgrey solid;
+  border-radius: 10px;
+  height: 40px;
+
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+
+}
+
+.url-button {
+  border: 1px #006e9c;
+  border-radius: 10px;
+  background-color: #006e9c;
+  color: white;
+  height: 40px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}

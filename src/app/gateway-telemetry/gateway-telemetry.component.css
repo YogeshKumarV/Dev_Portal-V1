@@ -1,0 +1,31 @@
+.heading-with-toggle h3 {
+    margin: 0px;
+  }
+
+  .chck_fture_text p{
+    margin-bottom: 0px;
+  }
+  
+  .parameter-item {
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    background-color: white;
+    color: black;
+    border-radius:8px;
+    border: 2px solid rgba(151, 71, 255, 1);
+    padding: 0px 12px 0px 12px;
+  }
+  
+  .parameter-item mat-icon {
+    font-size: 16px;
+  }
+
+  .custom-switch {
+    width: 2.2rem; /* Adjust the width */
+    height: 1.1rem; /* Adjust the height */
+}
+
+.toggle-header{
+  width: 100%;
+}

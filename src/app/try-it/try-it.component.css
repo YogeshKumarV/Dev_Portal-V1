@@ -1,0 +1,21 @@
+.token-field {
+  background-color: lightgray;
+  border-radius: 10px;
+  height: 200px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.token-row-text {
+  margin: auto;
+}
+
+.token-row-field {
+  margin: auto;
+  width: 900px;
+}
+
+.token-row-try {
+  margin: auto;
+}

@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 gateway-linkcard">
+            
+           <h2>Deploy New Revision</h2>
+           <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description"></textarea>
+            <div id="des" class="form-text">Brief description of the new revision.</div>
+          </div>
+          <h3>APi Gateway</h3>
+          <div class="row gap-2">
+            @for(card of gatewayCards; track card){
+            <div class="col-sm-3">
+                <!-- <div
+                  class="gateway-card"
+                  [class.selected]="card.isSelected"
+                  (click)="toggleSelection(card)"
+                >
+                  <input
+                    type="radio"
+                    [checked]="card.isSelected"
+                    (click)="$event.stopPropagation()"
+                    [value]="card.id"
+                  />
+                  {{ card.name }}
+                </div> -->
+                <div
+    class="gateway-card"
+    [class.selected]="card.isSelected"
+    (click)="selectCard(card)"
+  >
+    <input
+      type="radio"
+      [checked]="card.isSelected"
+      (click)="$event.stopPropagation()"
+      [value]="card.id"
+    />
+    {{ card.name }}
+  </div>
+              </div>
+            } 
+          </div>
+          <div class="row">
+            <div class="col-sm-12 d-flex justify-content-end">
+                <button class="btn btn-outline-primary" (click)="linkAndDeploy()">Deploy</button>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

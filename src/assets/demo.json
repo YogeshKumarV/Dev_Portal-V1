@@ -1,0 +1,43 @@
+{
+  "components": {
+    "securitySchemes": {
+      "KrakenD-JWT": {
+        "bearerFormat": "JWT",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "title": "gitgateway",
+    "version": ""
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/keycloak-protected3": {
+      "get": {
+        "operationId": "GET/keycloak-protected3",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "KrakenD-JWT": []
+          }
+        ]
+      }
+    }
+  }
+}
