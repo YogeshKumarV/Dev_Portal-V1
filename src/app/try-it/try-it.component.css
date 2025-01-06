@@ -7,15 +7,63 @@
   margin-top: 60px;
 }
 
-.token-row-text {
-  margin: auto;
+.id-and-secret{
+  margin-top: 60px;
 }
 
-.token-row-field {
-  margin: auto;
-  width: 900px;
+.id-field{
+  width: 300px;
+  height: 40px;
+  border: 1px lightgrey solid;
+  border-radius: 10px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.74), 0px 1px 1px 0px rgba(0, 0, 0, 0.64), 0px 1px 3px 0px rgba(0, 0, 0, 0.62);
+}
+.secret-field{
+  border-right: none;
+  width: 300px;
+  height: 40px;
+  border: 1px lightgrey solid;
+  border-radius: 10px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.74), 0px 1px 1px 0px rgba(0, 0, 0, 0.64), 0px 1px 3px 0px rgba(0, 0, 0, 0.62);
+}
+.secret{
+  margin-top: 20px;
+}
+.eye-button{
+  height: 40px;
+  border-left: none;
+  border: 1px lightgrey solid;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.74), 0px 1px 1px 0px rgba(0, 0, 0, 0.64), 0px 1px 3px 0px rgba(0, 0, 0, 0.62);
 }
 
-.token-row-try {
+.access-token-text{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: auto;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.74);
+}
+.access-token-text p{
+  margin-bottom: 0;
+}
+
+.access-token-field {
+  margin: auto;
+  width: 440px;
+  height: 40px;
+  border: 1px lightgrey solid;
+  border-radius: 10px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.74), 0px 1px 1px 0px rgba(0, 0, 0, 0.64), 0px 1px 3px 0px rgba(0, 0, 0, 0.62);
+ 
+}
+
+
+
+.access-token-button {
+  border: 1px #006e9c;
+  border-radius: 10px;
+  background-color: #006e9c;
+  color: white;
+  height: 40px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.74), 0px 1px 1px 0px rgba(0, 0, 0, 0.64), 0px 1px 3px 0px rgba(0, 0, 0, 0.62);
 }

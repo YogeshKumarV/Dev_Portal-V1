@@ -19,12 +19,12 @@
         </div>
     </div>
     <div class="row pt-3 g-3 row-size">
-        @for(item of endpointCards; track item.id){
+        @for(item of apiCards; track item.id){
         <div class="col-sm-3">
             <div class="api-card">
                 <div class="api-card-above d-flex justify-content-center align-items-center"
                     (click)="goToApiViewPage(item)">
-                    <img src="../../assets/images/Group.svg" />
+                    <img src="../../assets/images/Group.svg"/>
                 </div>
                 <div class="api-card-below">
                     <div class="status-row">
@@ -32,10 +32,10 @@
                         <p class="createdBy"> by {{item.createdBy}}</p>
                     </div>
 
-                    <div class="d-flex mt-3 ">
+                    <div class="d-flex mt-3 p-2">
                         <p>Context Path: </p>&nbsp;&nbsp;
                         <!-- <button class="status-button">{{item.endpoint}}</button> -->
-                        <p class="endpoint-name">&nbsp;{{item.endpoint}}&nbsp;</p>
+                        <p class="endpoint-name">&nbsp;{{item.path}}&nbsp;</p>
                     </div>
                     <!-- <p class="createdBy">by admin</p> -->
 

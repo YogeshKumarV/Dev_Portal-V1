@@ -18,14 +18,15 @@ export class MainService {
     return this.http.post(url,null,options)
   }
 
-  getEndpointCards(userId:any){
-    // const userId=localStorage.getItem('userid')
-    const url=urls.getEndpointCards+"?pageNo=0&pageSize=10";
-    const headers={
-      'userId':userId
+  getEndpointCards(pageNo: number, pageSize: number){
+    const userId = localStorage.getItem('userid')
+    // const url = urls.getApis + "?pageNo=0&pageSize=10";
+    const url = `${urls.getApis}?pageNo=${pageNo}&pageSize=${pageSize}`
+    const headers = {
+      'userId': userId
     }
-    const options:any={headers:headers}
-    return this.http.post(url,null,options)
+    const options: any = { headers: headers }
+    return this.http.post(url, null, options)
   }
 
   getCards(){

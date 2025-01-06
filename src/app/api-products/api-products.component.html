@@ -1,0 +1,91 @@
+
+@if(isShowApplication){
+    <div class="container-fluid">
+        <div class="row mt-3">
+            <div class="col-sm-12 d-flex justify-content-between">
+                <div>
+                    <h1>Api Products</h1>
+                </div>
+                <!-- <div>
+                    <button class="btn btn-outline-primary" (click)="goToCreateApplication()">
+                        Create Api Product
+                    </button>
+                </div> -->
+            </div>
+        </div>
+        @if(applicationResults.length && applicationResults.length>0){
+        <div class="row mt-3 ">
+            <div class="col-sm-12 overflow-cards">
+                <table mat-table [dataSource]="applicationResults" class="mat-elevation-z8">
+                    <!-- clientId Column -->
+                    <ng-container matColumnDef="clientId">
+                        <th mat-header-cell *matHeaderCellDef> Client ID </th>
+                        <td mat-cell *matCellDef="let element">
+                            <a (click)="navigateToDetails(element)" class="name-link cursorPointer">{{
+                                element.clientId}}</a>
+                        </td>
+                    </ng-container>
+     
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+     
+                    <!-- protocol Column -->
+                    <ng-container matColumnDef="protocol">
+                        <th mat-header-cell *matHeaderCellDef> Type </th>
+                        <td mat-cell *matCellDef="let element"> {{element.protocol}} </td>
+                    </ng-container>
+     
+                    <!-- Description Column -->
+                    <ng-container matColumnDef="description">
+                        <th mat-header-cell *matHeaderCellDef> Description </th>
+                        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                    </ng-container>
+     
+                    <!-- baseUrl Column -->
+                    <ng-container matColumnDef="baseUrl">
+                        <th mat-header-cell *matHeaderCellDef> Home </th>
+                        <td mat-cell *matCellDef="let element"> {{element.baseUrl}} </td>
+                    </ng-container>
+     
+                    <!-- Actions Column -->
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef> Action </th>
+                        <td mat-cell *matCellDef="let element">
+                            <!-- <div>
+                                <button type="button" class="btn btn-sm btn-outline-primary"
+                                    (click)="deleteApplication(element.id)">Delete</button>
+                            </div> -->
+                        </td>
+                    </ng-container>
+     
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+     
+     
+        </div>
+        <div class="row">
+            <mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)" [length]="length"
+                [pageSize]="pageSize" [disabled]="disabled" [showFirstLastButtons]="showFirstLastButtons"
+                [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []" [hidePageSize]="hidePageSize"
+                [pageIndex]="pageIndex" aria-label="Select page">
+            </mat-paginator>
+        </div>
+        }@else {
+        <div class="row">
+            <div class="col-sm-12 d-flex justify-content-center align-items-center">
+                <h1>Api Products are not available.Create Api Product</h1>
+            </div>
+        </div>
+        }
+     
+    </div>
+    }
+    @else {
+    <router-outlet></router-outlet>
+    }
+    

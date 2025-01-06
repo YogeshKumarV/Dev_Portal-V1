@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +28,20 @@ export class CommunicationService {
 
   updateShowParent(value: boolean) {
     this.showParentSource.next(value);
+  }
+  private apiData: ReplaySubject<string> = new ReplaySubject<string>(1);
+ 
+  setApiData(data: string): void {
+    this.apiData.next(data);
+  }
+ 
+  getApiData$(): Observable<string> {
+    return this.apiData.asObservable();
+  }
+
+  private applicationCreatedSource = new Subject<any>
+  applicationCreated$ = this.applicationCreatedSource.asObservable()
+  emitApplicationCreated(data: any) {
+    this.applicationCreatedSource.next(data)
   }
 }

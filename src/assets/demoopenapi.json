@@ -1,31 +1,65 @@
 {
-	"components": {},
+	"openapi": "3.0.2",
 	"info": {
-		"title": "KrakenD - API Gateway",
-		"version": ""
+	  "title": "dmo",
+	  "version": "1.0.0",
+	  "description": "demo api"
 	},
-	"openapi": "3.0.0",
+	"servers": [
+	  {
+		"url": "http://localhost:8082",
+		"description": "Local development server"
+	  },
+	  {
+		"url": "http://10.175.1.110:31703",
+		"description": "argocd server"
+	  }
+	],
 	"paths": {
-		"/massil/discovery": {
-			"get": {
-				"operationId": "GET/massil/discovery",
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"type": "object"
-								}
-							}
-						},
-						"description": "OK"
-					},
-					"500": {
-						"description": "Internal Server Error"
-					}
-				},
-				"security": []
+	  "/demo/keycloak-protected": {
+		"get": {
+		  "responses": {
+			"200": {
+			  "content": {
+				"application/json": {
+				  "schema": {
+					"type": "object"
+				  },
+				  "example": {
+					"agents": {},
+					"now": "2025-01-02 17:20:51.736742075 +0000 UTC m=+122.071440831",
+					"status": "ok"
+				  }
+				}
+			  },
+			  "description": "demo res"
 			}
+		  },
+		  "security": [
+			{
+			  "bearerAuth": []
+			}
+		  ],
+		  "operationId": "102"
 		}
+	  }
+	},
+	"components": {
+	  "securitySchemes": {
+		"bearerAuth": {
+		  "scheme": "bearer",
+		  "bearerFormat": "JWT",
+		  "type": "http"
+		},
+		"basicAuth": {
+		  "scheme": "basic",
+		  "type": "http"
+		},
+		"apiKeyAuth": {
+		  "type": "apiKey",
+		  "name": "X-API-Key",
+		  "in": "header"
+		}
+	  }
 	}
-}
+  }

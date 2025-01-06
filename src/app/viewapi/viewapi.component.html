@@ -12,7 +12,7 @@
                     </div>
 
                 </a>
-                <a mat-list-item routerLink="subscription" routerLinkActive="active">
+                <!-- <a mat-list-item routerLink="subscription" routerLinkActive="active">
                     <div class="d-flex align-items-center">
                         <span class="mat-icon-styles">
                             <mat-icon aria-hidden="false" aria-label="Example home icon"
@@ -20,7 +20,7 @@
                         </span>
                         <span class="anchor-head">Subscriptions</span>
                     </div>
-                </a>
+                </a> -->
                 <a mat-list-item routerLink="tryIt" routerLinkActive="active">
                     <div class="d-flex align-items-center">
                         <span class="mat-icon-styles">
@@ -39,7 +39,7 @@
                         <span class="anchor-head">Comments</span>
                     </div>
                 </a>
-                <a mat-list-item routerLink="policies">
+                <a mat-list-item routerLink="doc">
                     <div class="d-flex align-items-center">
                         <span class="mat-icon-styles">
                             <mat-icon aria-hidden="false" aria-label="Example home icon"
@@ -103,7 +103,7 @@
                             <img class="img-logo" src="../../assets/images/Group.svg" alt="logo-krakend">
                         </div>
                         <div class="col-sm-8 icon-support">
-                            <h3 class="icon-support-text"><b>{{endpointInfo?.apiName}}</b></h3>
+                            <h3 class="icon-support-text"><b>{{endpointInfo?.name}}</b></h3>
                             <!-- <h3>Api Name</h3> -->
 
                             <!-- <p>created by {{endpointInfo?.createdBy}}</p> -->
@@ -113,8 +113,8 @@
                     </div>
                     <div class="col-sm-6 about-name-section">
                         <div>
-                            <h3>{{endpointInfo.status}}</h3>
-                            <p>State: <b>Published</b></p>
+                            <h3>API Version: {{endpointInfo?.apiVersion}}</h3>
+                            <p>State: <b>{{endpointInfo?.status}}</b></p>
                         </div>
 
                     </div>

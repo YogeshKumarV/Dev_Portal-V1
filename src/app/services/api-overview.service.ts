@@ -7,14 +7,15 @@ import { urls } from '../../urls';
 })
 export class ApiOverviewService {
 
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient) {}
+  
   getEndPointDetails(id: any) {
-    // const url = `https://localhost:9443/api/am/devportal/v3/apis/${id}`;
-    // const url = `http://localhost:8082/krakend/endpoint/getEndpoint?endpointId=${id}`;
-
-
-    return this.http.get(urls.getEndpoint + `?endpointId=${id}`);
+    return this.http.get(urls.getApi+`?apiId=${id}`);
   }
+
+  getSwagger(id:any){
+    return this.http.get(urls.openApiSpecFileGetting+`?apiId=${id}`)
+  }
+
+  
 }

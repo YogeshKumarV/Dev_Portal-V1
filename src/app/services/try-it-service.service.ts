@@ -12,7 +12,7 @@ export class TryItServiceService {
     return this.http.post(urls.getGatewayName + `?endpointId=${id}`, null);
   }
 
-  getSwaggerSpecFile(gatewayName: any) {
-    return this.http.get(urls.openApiSpecFileGetting + `?gatewayName=${gatewayName}`)
+  getSwaggerSpecFile(apiId: any) {
+    return this.http.get(urls.openApiSpecFileGetting + `?apiId=${apiId}`)
   }
 }

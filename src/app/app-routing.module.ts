@@ -23,6 +23,10 @@ import { GatewaysHttpsecurityComponent } from './gateways-httpsecurity/gateways-
 import { GatewayApiMonetizationComponent } from './gateway-api-monetization/gateway-api-monetization.component';
 import { TryItComponent } from './try-it/try-it.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
+import { DocumentComponent } from './document/document.component';
+import { ApiProductsComponent } from './api-products/api-products.component';
+import { ViewApiProductsComponent } from './view-api-products/view-api-products.component';
+import { ApiProductOverviewComponent } from './api-product-overview/api-product-overview.component';
 
 const routes: Routes = [
   {
@@ -35,29 +39,22 @@ const routes: Routes = [
           { path: "tryIt", component: TryItComponent },
           { path: "subscription", component: SubscriptionsComponent },
           { path: "deployments", component: DeploymentComponent },
-          { path: "policies", component: PoliciesComponent },
+          { path: "doc", component: DocumentComponent },
           { path: "response", component: ResponseManipulationComponent },
           { path: "connectivity", component: ConnectivityComponent },
           { path: "openapi", component: OpenapiComponent }
-        ]
-      },
-      {
-        path: "overview/id", component: ApiOverviewComponent, children: [
-          { path: "tryIt", component: TryItComponent }
         ]
       }
     ]
   },
   {
-    path: "gateways", component: GatewaycardsComponent, children: [
+    path: "api-products", component: ApiProductsComponent, children: [
       { path: "creategateway", component: CreategatewayComponent },
       {
-        path: "viewgateway/:id", component: ViewgatewayComponent, children: [
-          { path: "dashboard", component: GatewayDashboardComponent },
-          { path: "service", component: GatewayServiceSettingsComponent },
-          { path: "telemetry", component: GatewayTelemetryComponent },
-          { path: "httpsecurity", component: GatewaysHttpsecurityComponent },
-          { path: "apimonetize", component: GatewayApiMonetizationComponent }
+        path: "viewapiproduct/:id", component: ViewApiProductsComponent, children: [
+          { path: "overview", component: ApiProductOverviewComponent },
+          { path: "subscription", component: SubscriptionsComponent },
+          
         ]
       }
     ]

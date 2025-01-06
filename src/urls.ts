@@ -1,4 +1,4 @@
-const host = "http://10.175.1.57:8082"
+const host = "http://10.175.1.53:8083"
 export const urls = {
     saveGateway: host + "/krakend/saveKrakendJson",
     // addEndpoint:host+"/krakend/addendpoints",
@@ -9,6 +9,9 @@ export const urls = {
     getGatewayCards: host + "/krakend/getKrakendJsonCards",
     getUser: host + "/user/getUser",
     deployFile: host + "/krakend/krakendFile",
+    getApis: host + "/api/getApiCards",
+    getApi: host + "/api/getApi",
+    getToken: host + "/clients/openid/getTokenFromApplication",
     getEndpointCards: host + "/krakend/endpoint/getEndpointCards",
     addEndpoint: host + "/krakend/endpoint/addendpoint",
     linkEndpoint: host + "/krakend/linkEndpoint",
@@ -29,5 +32,6 @@ export const urls = {
     addOrUPdateHttpSecurity: host + "/krakend/extraconfig/httpSecurity/addOrUpdateHttpSecurity",
 
     addOrUpdateServiceSetting: host + "/krakend/extraconfig/serviceSetting/addOrUpdateServiceSetting",
-    openApiSpecFileGetting: host + "/apicurio/getOpenApiJsonFromRegistry"
+    openApiSpecFileGetting: host + "/apicurio/getOpenApiJsonFromRegistry",
+    getApplications: host + "/clients/openid/getApplications"
 }

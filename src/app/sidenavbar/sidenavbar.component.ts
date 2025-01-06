@@ -66,21 +66,32 @@ isSidebarExpanded = false;
   isCollapsed = false;
   toggleMenu() {
     console.log(this.sidebarView);
-    
-    if(this.isMobile){
+    const url = this.router.url
+    if (this.isMobile) {
       this.sidenav.toggle();
       this.isCollapsed = false; // On mobile, the menu can never be collapsed
-    } else {
-      
-      if(this.sidebarView=='over'){
+    }
+    else if (url.startsWith('/apis/') || url.startsWith('/api-products/')) {
+      // Handles child routes of /apis
+      console.log("Child route of /apis detected");
+      if (this.sidenav.opened) {
+        this.sidenav.close();
+      } else {
+        this.sidenav.open();
+      }
+      this.sidebarView = "over";
+    }
+    else {
+      if (this.sidebarView == 'over') {
         this.sidenav.toggle();
         this.isCollapsed = false;
-      }else{
+      } else {
         this.sidenav.open(); // On desktop/tablet, the menu can never be fully closed
         this.isCollapsed = !this.isCollapsed;
       }
-      
-      
+
+
+
     }
   }
   toggleSidebar() {
@@ -88,10 +99,18 @@ isSidebarExpanded = false;
   }
   constructor( private router:Router,private observer: BreakpointObserver,public dialog: MatDialog) {
     this.router.events.subscribe(() => {
-      if(this.router.url === '/apis' || this.router.url === '/gateways' ){
-        this.sidebarView="side"
-      }else{
-this.sidebarView="over"
+      if (this.router.url === '/apis' || this.router.url === '/api-products') {
+        this.sidenav.open()
+        this.sidebarView = "side"
+      }
+      // else if (url.startsWith('/endpoints/')  ) {
+      //   // Handles child routes of /apis
+      //   console.log("Child route of /apis detected");
+      //   this.sidebarView = "over";
+      // }
+      else {
+        this.sidenav.close()
+        // this.sidebarView = "over"
       }
       // this.sidebarView = this.router.url !== '/apis';
     });

@@ -44,7 +44,7 @@ export class ApicardsComponent implements OnInit , AfterViewInit{
     this.isShowParent=true
   }
 
-  endpointCards: any;
+  apiCards: any;
   userDetails: any;
   userId: any = localStorage.getItem('userid');
 
@@ -95,10 +95,10 @@ export class ApicardsComponent implements OnInit , AfterViewInit{
   }
 
   loadCards(userId: any) {
-    this.mainSer.getEndpointCards(userId).subscribe({
+    this.mainSer.getEndpointCards(0,10).subscribe({
       next: (res: any) => {
         console.log(res);
-        this.endpointCards = res.endpointCards
+        this.apiCards = res.apiCards
       },
       error:(err)=>{
         console.error(err);

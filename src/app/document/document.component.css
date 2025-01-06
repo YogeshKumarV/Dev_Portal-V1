@@ -1,0 +1,7 @@
+#redoc-container {
+    min-height: 100vh;
+    width: 100%;
+  }
+  ::ng-deep .menu-content{
+    position: static !important;
+  }

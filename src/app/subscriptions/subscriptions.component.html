@@ -1,1 +1,57 @@
-<p>subscriptions works!</p>
+<!-- <p>subscriptions works!</p> -->
+<div class="container">
+    <div class="row mt-4">
+      <!-- <div class="col-sm-12">
+        <button class="btn btn-outline-primary" (click)="openDialog()">Subscribe Apis</button>
+      </div> -->
+    </div>
+    @if(filteredEndpointCards.data.length && filteredEndpointCards.data.length>0){
+    <div class="row mt-3">
+      <table mat-table [dataSource]="filteredEndpointCards" class="mat-elevation-z8">
+        <ng-container matColumnDef="Api Name">
+          <th mat-header-cell *matHeaderCellDef> Api Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+  
+        <!-- Name Column -->
+  
+        <ng-container matColumnDef="version">
+          <th mat-header-cell *matHeaderCellDef> Version </th>
+          <td mat-cell *matCellDef="let element"> {{element.apiVersion}} </td>
+        </ng-container>
+        <ng-container matColumnDef="plan">
+          <th mat-header-cell *matHeaderCellDef> Business Plan </th>
+          <td mat-cell *matCellDef="let element"> plan1 </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Subscription Status </th>
+          <td mat-cell *matCellDef="let element"> Subscribed </td>
+        </ng-container>
+        <!-- <ng-container matColumnDef="Action">
+          <th mat-header-cell *matHeaderCellDef>Action </th>
+          <td mat-cell *matCellDef="let element">
+          
+          </td>
+        </ng-container> -->
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)" [length]="length"
+        [pageSize]="pageSize" [disabled]="disabled" [showFirstLastButtons]="showFirstLastButtons"
+        [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []" [hidePageSize]="hidePageSize"
+        [pageIndex]="pageIndex" aria-label="Select page">
+      </mat-paginator>
+  
+    </div>
+    }
+    @else {
+    <div class="row">
+      <div class="col-sm-12 d-flex justify-content-center align-items-center">
+        <h1>Subscribed Apis are not available.Subscribe</h1>
+      </div>
+    </div>
+  
+    }
+  
+  </div>
