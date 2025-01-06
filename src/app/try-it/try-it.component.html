@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row mt-4">
+  <div class="row mt-4" *ngIf="!(apiDataFromOverview?.authBasic  != null)">
     <h4>Key and Secret</h4>
     <div class="col-sm-6 d-flex flex-column justify-content-between">
       <!-- <label for="clientId" class="form-label">Client ID</label> -->
@@ -26,7 +26,7 @@
 
   </div>
 
-  <div class="row mt-3">
+  <div class="row mt-3" *ngIf="!(apiDataFromOverview?.authBasic  != null)">
     <div class="col-sm-12 col-md-6">
       <div class="row">
         <div class="col-sm-8">
@@ -37,6 +37,12 @@
             <button type="button" class="btn btn-outline-secondary" (click)="toggleTokenVisibility()">
                   <i [ngClass]="isTokenVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
               </button>
+              <button 
+              type="button" 
+              class="btn btn-outline-secondary" 
+              (click)="copyToClipboard()">
+              <i class="bi bi-clipboard"></i>
+            </button>
         </div>
         <div class="form-text">Enter Access Token</div>
         
@@ -49,6 +55,47 @@
     </div>
     
   </div>
+
+  <div class="row mt-4" *ngIf="(apiDataFromOverview?.authBasic  != null)">
+    <h4>Basic Authentication</h4>
+    <div class="col-sm-4 d-flex flex-column justify-content-between">
+      <!-- <label for="clientId" class="form-label">Client ID</label> -->
+      <div class="input-group">
+        <input type="text" class="form-control" id = "id"
+        [(ngModel)]="username" placeholder="user name"/>   
+      </div>
+      <div class="form-text">User Name</div>
+    </div>
+    
+    <div class="col-sm-4 d-flex flex-column justify-content-between">
+      <!-- <label for="secret" class="form-label">Client Secret</label> -->
+      <div class="input-group">
+        <input type="{{ isPasswordVisible ? 'text' : 'password' }}" class="form-control" id="secret"
+        [(ngModel)]="password" placeholder="password"/>
+        <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()">
+            <i [ngClass]="isPasswordVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
+        </button>
+        
+    </div>
+    <div class="form-text">Password</div>
+    </div>
+    <div class="col-sm-4">
+      <!-- <label for="secret" class="form-label">Client Secret</label> -->
+      <button class="access-token-button1" (click)="enterUserDeatils()">Submit</button>
+    </div>
+
+  </div>
+  <!-- <div class="row mt-4" *ngIf="(apiDataFromOverview?.authBasic  != null)">
+    
+    <div class="col-sm-6 d-flex flex-column justify-content-between">
+     
+    </div>
+    
+    <div class="col-sm-6 d-flex flex-column justify-content-center align-item-center">
+      <button class="access-token-button1" (click)="enterUserDeatils()">Enter</button>
+    </div>
+
+  </div> -->
   <!-- <div class="col-sm-12 row token-field d-flex">
     
 
@@ -73,3 +120,5 @@
     </div>
   </div>
 </div>
+
+<!-- <div id="json">{{jsonData}}</div> -->

@@ -14,26 +14,7 @@ import { urls } from '../../urls';
 })
 export class TryItComponent implements AfterViewInit {
 
-  ngOnInit(): void {
   
-    this.communicate.getApiData$().subscribe((data:any)=>{
-      console.log(data);
-      this.apiDataFromOverview=data;
-      this.applicationId = data?.ekeyClockClient?.id;
-      console.log(this.applicationId);
-      
-    })
-
-
-    // Retrieve the 'id' from the parent route
-    this.route.parent?.paramMap.subscribe(params => {
-      this.paramId = params.get('id');
-      
-    });
-    
-    this.openApiUrl = urls.openApiSpecFileGetting+`?apiId=${this.apiDataFromOverview?.id}`;
-    
-  }
 
   receivedData: any;
   
@@ -46,6 +27,20 @@ export class TryItComponent implements AfterViewInit {
   isPasswordVisible: boolean = false;
   isTokenVisible: boolean = false;
 
+  copyToClipboard(): void {
+    
+    // Use the Clipboard API to copy the token
+    if (this.accessToken) {
+      navigator.clipboard.writeText(this.accessToken).then(() => {
+        alert('Access Token copied to clipboard!');
+      }).catch(err => {
+        console.error('Failed to copy the token: ', err);
+      });
+    } else {
+      alert('No Access Token to copy.');
+    }
+  }
+
 
   togglePasswordVisibility(): void {
     this.isPasswordVisible = !this.isPasswordVisible;
@@ -54,7 +49,7 @@ export class TryItComponent implements AfterViewInit {
     this.isTokenVisible = !this.isTokenVisible;
   }
 
-   openApiUrl: any;
+  //  openApiUrl: any;
     
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private tryItServices: TryItServiceService, private communicate : CommunicationService) {
     console.log(history);
@@ -66,17 +61,29 @@ export class TryItComponent implements AfterViewInit {
     const child = root.firstChild;
     this.paramId = root.children.slice()[0].children.slice()[0].paramMap.get('id');
     this.receivedData = history.state
-
   }
 
   accessToken: any;
+  username: string = ''; // Store username for basic authentication
+password: string = ''; // Store password for basic authentication
+enterUserDeatils(){
+  if (!this.username || !this.password) {
+    alert('Please enter both username and password.');
+    return;
+  }
+  alert(`Username: ${this.username}, Password: ${this.password}`);
+  this.renderSwaggerUIWithBasicAuth(this.username, this.password);
+}
   getKey(){
+    
     this.fetchAccessTokenFromService().subscribe(
       (response: any) => {
         this.accessToken = response.access_token;
+        console.log(this.accessToken);
+        
         if (this.accessToken) {
          
-          this.renderSwaggerUI(this.accessToken);
+           this.renderSwaggerUI(this.accessToken);
         } else {
           console.error('Access token not found in the response.');
         }
@@ -86,7 +93,7 @@ export class TryItComponent implements AfterViewInit {
         }
     );
   }
-
+  
   ngAfterViewInit(): void {
     
   }
@@ -103,7 +110,7 @@ export class TryItComponent implements AfterViewInit {
   private renderSwaggerUI(token: string): void {
     SwaggerUI({
       dom_id: '#swagger-ui',
-      url: this.openApiUrl,
+      spec: JSON.parse(this.jsonData),
       layout: "BaseLayout",
       requestInterceptor: (req) => {
         console.log(token);
@@ -112,6 +119,65 @@ export class TryItComponent implements AfterViewInit {
         return req;
       }
     });
+  }
+
+  jsonData:any;
+  private renderSwaggerUIWithBasicAuth(username: string, password: string): void {
+    
+    
+    SwaggerUI({
+      dom_id: '#swagger-ui',
+      spec: JSON.parse(this.jsonData),
+      layout: "BaseLayout",
+      requestInterceptor: (req) => {
+        const credentials = btoa(`${username}:${password}`);
+        console.log(credentials)
+        req['headers']['Authorization'] = `Basic ${credentials}`;
+        console.log('Authorization Header:', req['headers']['Authorization']);
+        return req;
+      }
+    });
+  }
+  
+
+  tokenFromLocalStorage: any;
+
+  ngOnInit(): void {
+
+    this.tokenFromLocalStorage = localStorage.getItem('token')
+    console.log(this.tokenFromLocalStorage)
+    
+  
+    this.communicate.getApiData$().subscribe((data:any)=>{
+      console.log(data);
+      this.apiDataFromOverview=data;
+      this.applicationId = data?.ekeyClockClient?.id;
+      console.log(this.applicationId);
+      
+    })
+
+
+    // Retrieve the 'id' from the parent route
+    this.route.parent?.paramMap.subscribe(params => {
+      this.paramId = params.get('id');
+      
+    });
+    
+    //  this.openApiUrl = urls.openApiSpecFileGetting+`?apiId=${this.apiDataFromOverview?.id}`;
+
+    this.tryItServices.getSwaggerSpecFile(this.apiDataFromOverview?.id).subscribe(
+      (response) => {
+        this.jsonData = JSON.stringify(response);
+        console.log('Response:', this.jsonData);
+      },
+      (error) => {
+        console.error('Error:', error); // Handle errors
+      }
+    )
+    
+    
+    // this.renderSwaggerUI(this.accessToken);
+    
   }
 
   
