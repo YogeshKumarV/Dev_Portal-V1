@@ -32,6 +32,9 @@
   .nav-header{
     background: linear-gradient(to right,rgba(7, 90, 158, 1),rgba(5, 63, 110, 1),rgba(3, 32, 56, 1));
   }
+  .search-container{
+    width: 70%;
+  }
   .input-search{
     width:60% !important;
     border-top-right-radius: 20px;

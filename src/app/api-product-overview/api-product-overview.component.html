@@ -1,23 +1,58 @@
 <div class="container">
+    <div class="row">
+        <h3 class="heading-text">API Products Overview</h3>
+        <h4 class="sub-heading">Keys and IDs</h4>
+      </div>
     <div class="row p-4">
-        <div class="col-sm-6">
-            <div class="d-flex flex-column justify-content-between">
-                <label for="key" class="form-label">Consumer Key</label>
-                <input type="text" class="form-control" id="key" [value]="applicationData?.clientId || ''"
-                    placeholder="" readonly />
+        <div class="col-sm-5">
+            <div class="col-sm-12 d-flex">
+              <div class="col-sm-5 d-flex align-item-center">
+                <h3 class="heading-text">Consumer key</h3>
+              </div>
+              <div class="col-sm-5">
+                <input
+                  type="text"
+                  class="form-control"
+                  style="border: none; color: rgba(91, 189, 102, 1)"
+                  id="id"
+                  [value]="applicationData?.clientId || ''"
+                  placeholder=""
+                  readonly
+                />
+               </div>
             </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="d-flex flex-column justify-content-between">
-                <label for="secret" class="form-label">Consumer Secret</label>
-                <div class="input-group">
-                    <input type="{{ isPasswordVisible ? 'text' : 'password' }}" class="form-control" id="secret"
-                        [value]="applicationData?.secret || ''" placeholder="" readonly />
-                    <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()">
-                        <i [ngClass]="isPasswordVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
-                    </button>
-                </div>
+            <div class="form-text">Consumer Key of the Application</div>
+          </div>
+      
+          
+      
+          <div class="col-sm-5">
+            <div class="col-sm-12 d-flex">
+              <div class="col-sm-5">
+                <h3 class="heading-text">Consumer Secret</h3>
+                  </div>
+              <div class="col-sm-5 d-flex">
+                <input
+                  type="{{ isPasswordVisible ? 'text' : 'password' }}"
+                  class="form-control"
+                  style="border: none; color: rgba(91, 189, 102, 1)"
+                  id="secret"
+                  [value]="applicationData?.secret || ''"
+                  placeholder=""
+                  readonly
+                />
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  style="border: none"
+                  (click)="togglePasswordVisibility()"
+                >
+                  <i [ngClass]="isPasswordVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
+                </button>
+              </div>
             </div>
-        </div>
+            <div class="form-text">Consumer secret of the Application</div>
+          </div>
+       
     </div>
 </div>

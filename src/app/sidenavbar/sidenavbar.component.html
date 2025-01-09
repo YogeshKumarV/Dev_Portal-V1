@@ -1,16 +1,19 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
   <mat-toolbar class="example-toolbar nav-header d-flex justify-content-between">
-    <div class="col-sm-7 d-flex align-items-center">
+    <div class="col-sm-4 d-flex align-items-center">
       <button mat-icon-button (click)="toggleMenu()"><mat-icon
           class="material-symbols-outlined">menu</mat-icon></button>
       <img src="../../assets/images/logo-krakend.svg" />
     </div>
-    <div class="col-sm-5 d-flex align-items-center justify-content-between">
-      <div class="input-group">
+    <div class="col-sm-4 d-flex justify-content-center">
+      <div class="input-group search-container">
         <span class="input-group-text searchbar" id="basic-addon1"><i class="bi bi-search"></i></span>
         <!-- <input type="search" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"> -->
         <input type="search" class="form-control input-search" />
       </div>
+    </div>
+    <div class="col-sm-4 d-flex align-items-center justify-content-end">
+     
       <!-- <input type="search" class="form-control input-search"/> -->
       <div class="d-flex align-items-center">
         <mat-icon class="material-symbols-outlined profile-icon-size" (click)="openDialog()">account_circle</mat-icon>

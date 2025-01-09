@@ -6,6 +6,7 @@ import { ActivatedRoute, ActivatedRouteSnapshot, Router, RouterState, RouterStat
 import { CommunicationService } from '../services/communication.service';
 
 import { urls } from '../../urls';
+import { ApiOverviewService } from '../services/api-overview.service';
 
 @Component({
   selector: 'app-try-it',
@@ -27,18 +28,43 @@ export class TryItComponent implements AfterViewInit {
   isPasswordVisible: boolean = false;
   isTokenVisible: boolean = false;
 
-  copyToClipboard(): void {
-    
-    // Use the Clipboard API to copy the token
-    if (this.accessToken) {
-      navigator.clipboard.writeText(this.accessToken).then(() => {
-        alert('Access Token copied to clipboard!');
-      }).catch(err => {
-        console.error('Failed to copy the token: ', err);
-      });
-    } else {
-      alert('No Access Token to copy.');
+  isCopied = false;
+
+
+  copyInputMessage(inputElement: HTMLInputElement): void {
+    const textToCopy = inputElement.value.trim();
+
+    if (!textToCopy) {
+      alert('Nothing to copy! Please Generate the Access Token first, to copy.');
+      return;
     }
+
+    // Create a temporary textarea element for copying
+    const textarea = document.createElement('textarea');
+    textarea.value = textToCopy;
+    document.body.appendChild(textarea);
+
+    // Select the text and copy it
+    textarea.select();
+    try {
+      const successful = document.execCommand('copy');
+      if (successful) {
+        // alert('Text copied to clipboard!');
+        this.isCopied = true
+        setTimeout(()=>{
+          this.isCopied = false
+        }
+        ,5000)
+        
+      } else {
+        alert('Failed to copy text. Please try again.');
+      }
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+      alert('Failed to copy text. Please try again.');
+    }
+    document.body.removeChild(textarea);
+    
   }
 
 
@@ -51,7 +77,7 @@ export class TryItComponent implements AfterViewInit {
 
   //  openApiUrl: any;
     
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private tryItServices: TryItServiceService, private communicate : CommunicationService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private tryItServices: TryItServiceService, private communicate : CommunicationService,private overviewService: ApiOverviewService) {
     console.log(history);
     const state: RouterState = router.routerState;
     console.log(state);
@@ -71,7 +97,7 @@ enterUserDeatils(){
     alert('Please enter both username and password.');
     return;
   }
-  alert(`Username: ${this.username}, Password: ${this.password}`);
+  // alert(`Username: ${this.username}, Password: ${this.password}`);
   this.renderSwaggerUIWithBasicAuth(this.username, this.password);
 }
   getKey(){
@@ -80,9 +106,8 @@ enterUserDeatils(){
       (response: any) => {
         this.accessToken = response.access_token;
         console.log(this.accessToken);
-        
         if (this.accessToken) {
-         
+          // alert('ok')
            this.renderSwaggerUI(this.accessToken);
         } else {
           console.error('Access token not found in the response.');
@@ -96,7 +121,7 @@ enterUserDeatils(){
   
   ngAfterViewInit(): void {
     
-  }
+  } 
 
   private fetchAccessTokenFromService(){
     const headers:any = {
@@ -108,6 +133,8 @@ enterUserDeatils(){
   }
 
   private renderSwaggerUI(token: string): void {
+    console.log(token);
+    
     SwaggerUI({
       dom_id: '#swagger-ui',
       spec: JSON.parse(this.jsonData),
@@ -123,8 +150,6 @@ enterUserDeatils(){
 
   jsonData:any;
   private renderSwaggerUIWithBasicAuth(username: string, password: string): void {
-    
-    
     SwaggerUI({
       dom_id: '#swagger-ui',
       spec: JSON.parse(this.jsonData),
@@ -146,7 +171,26 @@ enterUserDeatils(){
 
     this.tokenFromLocalStorage = localStorage.getItem('token')
     console.log(this.tokenFromLocalStorage)
-    
+    this.overviewService.getEndPointDetails(this.paramId).subscribe({
+      next: (res: any) => {
+         console.log(res);
+         this.apiDataFromOverview=res;
+        this.communicate.setApiData(res)
+        if(this.apiDataFromOverview){
+          this.tryItServices.getSwaggerSpecFile(this.apiDataFromOverview?.id).subscribe(
+            (response) => {
+              this.jsonData = JSON.stringify(response);
+              console.log('Response:', this.jsonData);
+            },
+            (error) => {
+              console.error('Error:', error); // Handle errors
+            }
+          )
+        }
+      
+        // console.log(this.apiData);
+      }
+    })
   
     this.communicate.getApiData$().subscribe((data:any)=>{
       console.log(data);
@@ -165,15 +209,7 @@ enterUserDeatils(){
     
     //  this.openApiUrl = urls.openApiSpecFileGetting+`?apiId=${this.apiDataFromOverview?.id}`;
 
-    this.tryItServices.getSwaggerSpecFile(this.apiDataFromOverview?.id).subscribe(
-      (response) => {
-        this.jsonData = JSON.stringify(response);
-        console.log('Response:', this.jsonData);
-      },
-      (error) => {
-        console.error('Error:', error); // Handle errors
-      }
-    )
+  
     
     
     // this.renderSwaggerUI(this.accessToken);

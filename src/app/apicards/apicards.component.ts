@@ -5,6 +5,7 @@ import { KeycloakEventType, KeycloakService } from 'keycloak-angular';
 import { filter, Subscription } from 'rxjs';
 import { CommunicationService } from '../services/communication.service';
 import { ToastService } from '../services/toast.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-apicards',
@@ -15,7 +16,7 @@ export class ApicardsComponent implements OnInit , AfterViewInit{
 
   private subscription: Subscription;
 
-  constructor(private router: Router, private route: ActivatedRoute, private mainSer: MainService, private readonly keycloak: KeycloakService, private communucationSer: CommunicationService,private toastService: ToastService) {
+  constructor(private router: Router, private route: ActivatedRoute, private mainSer: MainService, private readonly keycloak: KeycloakService, private communucationSer: CommunicationService,private toastService: ToastService,private appComponent:AppComponent ) {
 
     this.router.events.subscribe((event) => {
 
@@ -34,7 +35,7 @@ export class ApicardsComponent implements OnInit , AfterViewInit{
     this.subscription = this.communucationSer.apiCreated$.subscribe(
       (updatedData: any) => {
         console.log('Updated data received from child component!', updatedData);
-        this.loadCards(this.userId);
+        this.loadCards();
 
 
       }
@@ -60,41 +61,17 @@ export class ApicardsComponent implements OnInit , AfterViewInit{
   ngOnInit() {
     // this.isShowParent=true
     console.log(this.isShowParent);
-
-    if (this.userId) {
-      this.loadCards(this.userId)
-    } else {
-      this.keycloak.keycloakEvents$.pipe(filter((e: any) => e.type === KeycloakEventType.OnAuthSuccess))
-        .subscribe({
-          next: () => {
-            const token: any = this.keycloak.getKeycloakInstance().token
-            console.log(this.keycloak.getKeycloakInstance().token);
-
-
-            this.keycloak.getKeycloakInstance().loadUserInfo().then((user: any) => {
-              console.log(user);
-              this.loadCards(user.sub)
-            })
-            console.log(this.keycloak.getKeycloakInstance().token);
-            console.log(this.keycloak.isLoggedIn());
-          }
-        })
-    }
-    // this.loadCards();
-    // this.router.events.subscribe(event => {
-    //   if (event instanceof NavigationEnd) {
-    //     if (this.router.url === '/apis') {
-    //       this.loadCards(this.userId); // Reload your data here
-    //     }
-    //   }
-    // });
+    this.appComponent.userIdAvailable$.subscribe((userId) => {
+      this.userId = userId;
+      this.loadCards(); // Call loadCards only when userId is available
+    });
     this.communucationSer.showParent$.subscribe((value) => {
       this.isShowParent = value;
       console.log('showParent updated to:', this.isShowParent);
     });
   }
 
-  loadCards(userId: any) {
+  loadCards() {
     this.mainSer.getEndpointCards(0,10).subscribe({
       next: (res: any) => {
         console.log(res);
@@ -126,7 +103,7 @@ export class ApicardsComponent implements OnInit , AfterViewInit{
   goToApiViewPage(item: any) {
     // this.isShowParent=false;
     this.communucationSer.updateShowParent(false);
-    this.router.navigate([`viewapi/${item.id}/overview`], { state: { body: item }, relativeTo: this.route })
+    this.router.navigate([`viewapi/${item.id}/doc`], { state: { body: item }, relativeTo: this.route })
   }
 
   deleteEndpoint(endpointId:any){
@@ -134,11 +111,11 @@ export class ApicardsComponent implements OnInit , AfterViewInit{
       next:(res:any)=>{
         console.log(res);
         this.showSuccess(res.message)
-        this.loadCards(this.userId)
+        this.loadCards()
       },
       error:(err:any)=>{
         this.showError(err.message)
-        this.loadCards(this.userId)
+        this.loadCards()
       }
     })
   }

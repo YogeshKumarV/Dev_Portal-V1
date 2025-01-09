@@ -21,7 +21,7 @@ export class MainService {
   getEndpointCards(pageNo: number, pageSize: number){
     const userId = localStorage.getItem('userid')
     // const url = urls.getApis + "?pageNo=0&pageSize=10";
-    const url = `${urls.getApis}?pageNo=${pageNo}&pageSize=${pageSize}`
+    const url = `${urls.getDeployedApis}?pageNo=${pageNo}&pageSize=${pageSize}`
     const headers = {
       'userId': userId
     }

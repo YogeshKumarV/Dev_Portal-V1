@@ -1,74 +1,45 @@
 <!-- <p>view-api-products works!</p> -->
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-2 sidemenu">
-            <mat-nav-list>
-                <a mat-list-item routerLink="overview" routerLinkActive="active">
-                    <div class="d-flex align-items-center">
-                        <span class="mat-icon-styles">
-                            <mat-icon aria-hidden="false" aria-label="Example home icon"
-                                class="material-symbols-outlined " fontIcon="settings"></mat-icon>
-                        </span>
-                        <span class="anchor-head">Overview</span>
-                    </div>
-
-                </a>
-                <!-- <a mat-list-item routerLink="productionkeys" routerLinkActive="active">
-                    <div class="d-flex align-items-center">
-                        <span class="mat-icon-styles">
-                            <mat-icon aria-hidden="false" aria-label="Example home icon"
-                                class="material-symbols-outlined " fontIcon="gate"></mat-icon>
-                        </span>
-                        <span class="anchor-head">Production Keys</span>
-                    </div>
-                </a> -->
-                <!-- <a mat-list-item routerLink="oauthtokens" routerLinkActive="active">
-                    <div class="d-flex align-items-center">
-                        <span class="mat-icon-styles">
-                            <mat-icon aria-hidden="false" aria-label="Example home icon"
-                                class="material-symbols-outlined " fontIcon="add_moderator"></mat-icon>
-                        </span>
-                        <span class="anchor-head">OAuth 2 Tokens</span>
-                    </div>
-                </a>
-                <a mat-list-item routerLink="apikeys">
-                    <div class="d-flex align-items-center">
-                        <span class="mat-icon-styles">
-                            <mat-icon aria-hidden="false" aria-label="Example home icon"
-                                class="material-symbols-outlined " fontIcon="speed"></mat-icon>
-                        </span>
-                        <span class="anchor-head">Api Key</span>
-                    </div>
-                </a> -->
-                <a mat-list-item routerLink="subscription">
-                    <div class="d-flex align-items-center">
-                        <span class="mat-icon-styles">
-                            <mat-icon aria-hidden="false" aria-label="Example home icon"
-                                class="material-symbols-outlined " fontIcon="policy"></mat-icon>
-                        </span>
-                        <span class="anchor-head">Subscriptions</span>
-                    </div>
-                </a>
-            </mat-nav-list>
-        </div>
-        <div class="col-sm-10">
-            <!-- <div class="about-api-card">
-                <div class="row">
-                    <div class="col-sm-3 about-name-section d-flex gap-2">
-                        <div class="img-bg">
-                            <img src="../../assets/images/Group.svg" alt="logo-krakend">
-                        </div>
-                    </div>
-                    <div class="col-sm-3 about-name-section">
-                        <div class="icon-support">
-                            <p>State</p>
-                        </div>
-
-                    </div>
-                </div>
-            </div> -->
+    <div class="row g-3 p-4">
+        
+        <div class="col-sm-12 navlist-container">
+            <div class="row p-2 ">
+                <div class="col-sm-12">
+                    <h3 style="font-size: 18px;">API Product</h3>
+                  </div>
+            </div>
             
-            <router-outlet></router-outlet>
+          <div class="row p-2 gap-4">
+            <!-- <div class="col-sm-1 navlist-button-main">
+              <a mat-list-item routerLink="overview" routerLinkActive="active" class="navlist-button">
+                    <span class="navlist-heading">Overview</span>
+               </a>
+            </div> -->
+            <div class="col-sm-1">
+              <a mat-list-item routerLink="overview" routerLinkActive="active" class="navlist-button">
+                  <span class="navlist-heading">Overview</span>
+             </a>
+          </div>
+            <div class="col-sm-1">
+              <!-- <button class="navlist-button">Try it</button> -->
+              <a mat-list-item routerLink="subscription" routerLinkActive="active" class="navlist-button">
+                <span class="navlist-heading">Subscriptions</span>
+           </a>
+            </div>
+            
+            <!-- <div class="col-sm-1">
+                <a mat-list-item routerLink="comments" routerLinkActive="active" class="navlist-button">
+                    <span class="navlist-heading">Comments</span>
+               </a>
+            </div> -->
+          </div>
         </div>
+        <div class="col-sm-12 navlist-container">  
+            <div class="row p-2">
+              <div class="col-sm-12">
+                  <router-outlet></router-outlet>
+              </div>
+            </div>
+          </div>
     </div>
 </div>

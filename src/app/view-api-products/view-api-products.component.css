@@ -61,5 +61,36 @@
   .icon-support h3, p{
     margin: 0px;
   }
+  .navlist-container{
+    background-color: white;
+    border-radius: 10px;
+  }
+  .navlist-button{
+    background-color: rgba(247, 247, 247, 1);
+    height: 38px;
+    border: none;
+    width: 115px;
+    border-radius: 10px;
+    font-size: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .navlist-heading{
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  .active{
+    background-color: rgba(6, 73, 128, 1);
+    
+  }
+  .active span{
+    color: white;
+  }
+  
 
   

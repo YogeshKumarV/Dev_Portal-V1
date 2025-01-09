@@ -66,7 +66,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     keycloak.init({
       config: {
         realm: 'master',
-        url: 'http://10.175.1.53:8080/',
+        url: 'http://10.175.1.57:8080/',
         clientId: 'publisherportal',
 
 
