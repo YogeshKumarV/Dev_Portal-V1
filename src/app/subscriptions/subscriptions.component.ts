@@ -47,7 +47,7 @@ export class SubscriptionsComponent {
 
   }
 
-  apiCards: any[] = []
+  apiCards= new MatTableDataSource<any>([])
   // filteredEndpointCards: any[] = []
   // dataSource = new MatTableDataSource<PeriodicElement>([]); // Initially empty
   filteredEndpointCards = new MatTableDataSource<any>([]); // Initially empty
@@ -72,11 +72,11 @@ export class SubscriptionsComponent {
     this.mainSer.getEndpointCards(this.pageIndex, this.pageSize).subscribe({
       next: (res: any) => {
         console.log(res);
-        this.apiCards = res.apiCards
+        this.apiCards.data = res.apiCards
         this.length = res.totalRecords
-        this.filteredEndpointCards.data = this.apiCards.filter(
-          (card: any) => card.isSubscribed === true
-        );
+        // this.filteredEndpointCards.data = this.apiCards.filter(
+        //   (card: any) => card.isSubscribed === true
+        // );
         console.log("Filtered subscriptions:", this.filteredEndpointCards);
         console.log("subscriptions:", this.apiCards);
       },
