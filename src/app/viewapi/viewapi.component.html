@@ -1,49 +1,84 @@
 <div class="container-fluid">
   <div class="row g-3 p-4">
-    
     <div class="col-sm-12 navlist-container">
-        <div class="row p-2 ">
-            <div class="col-sm-12">
-                <h3 style="font-size: 18px;">Configurations</h3>
-                <p style="font-size: 11px;">Configure your API here</p>
+      
+      
+      
+      <div class="row mb-3">
+      
+        <div class="row mt-2">
+          <div class="col-sm-12 overall-card">
+              <div class="row pd-3">
+                  <div class="col-sm-3">
+                      <div class="created-card d-flex flex-column justify-content-center">
+                          <p class="head">API Name</p>
+                          <p class="name">{{endpointInfo?.name}}</p>
+                      </div>
+                  </div>
+                  <div class="col-sm-3">
+                      <div class="context-card d-flex flex-column justify-content-center">
+                          <p class="head">Context Path</p>
+                          <p class="name">{{endpointInfo?.path}}</p>
+                      </div>
+                  </div>
+                  <div class="col-sm-3">
+                      <div class="version-card d-flex flex-column justify-content-center">
+                          <p class="head">Version</p>
+                          <p class="name">{{endpointInfo?.apiVersion}}</p>
+                      </div>
+                  </div>
+                  <div class="col-sm-3">
+                      <div class="created-card d-flex flex-column justify-content-center">
+                          <p class="head">Security Type</p>
+                          <p class="name">{{securityDetails}}</p>
+                      </div>
+                  </div>
               </div>
-        </div>
-        
-      <div class="row p-2 gap-2">
-        <!-- <div class="col-sm-1 navlist-button-main">
-          <a mat-list-item routerLink="overview" routerLinkActive="active" class="navlist-button">
-                <span class="navlist-heading">Overview</span>
-           </a>
-        </div> -->
-        <div class="col-sm-1">
-          <a mat-list-item routerLink="doc" routerLinkActive="active" class="navlist-button">
-              <span class="navlist-heading">Documents</span>
-         </a>
+          </div>
       </div>
+      </div>
+
+      <div class="row mb-3 gap-2">
+       
+        <div class="col-sm-1">
+          <a
+            mat-list-item
+            routerLink="doc"
+            routerLinkActive="active"
+            class="navlist-button"
+          >
+            <span class="navlist-heading">Documents</span>
+          </a>
+        </div>
         <div class="col-sm-1">
           <!-- <button class="navlist-button">Try it</button> -->
-          <a mat-list-item routerLink="tryIt" routerLinkActive="active" class="navlist-button">
+          <a
+            mat-list-item
+            routerLink="tryIt"
+            routerLinkActive="active"
+            class="navlist-button"
+          >
             <span class="navlist-heading">Try it</span>
-       </a>
+          </a>
         </div>
-        
+
         <!-- <div class="col-sm-1">
             <a mat-list-item routerLink="comments" routerLinkActive="active" class="navlist-button">
                 <span class="navlist-heading">Comments</span>
            </a>
         </div> -->
       </div>
+      
     </div>
 
     <div class="col-sm-12 navlist-container">
-                
       <div class="row p-2">
         <div class="col-sm-12">
-            <router-outlet></router-outlet>
+          <router-outlet></router-outlet>
         </div>
       </div>
     </div>
-<!-- 
+    <!-- 
     <div class="col-sm-10">
      <router-outlet></router-outlet>
     </div> -->

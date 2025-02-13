@@ -1,26 +1,36 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-  <mat-toolbar class="example-toolbar nav-header d-flex justify-content-between">
+  <mat-toolbar
+    class="example-toolbar nav-header d-flex justify-content-between"
+  >
     <div class="col-sm-4 d-flex align-items-center">
-      <button mat-icon-button (click)="toggleMenu()"><mat-icon
-          class="material-symbols-outlined">menu</mat-icon></button>
-      <img src="../../assets/images/logo-krakend.svg" />
+      <button mat-icon-button (click)="toggleMenu()">
+        <mat-icon class="material-symbols-outlined">menu</mat-icon>
+      </button>
+      <div class="d-flex gap-2 align-items-baseline">
+        <img src="../../assets/images/logo-krakend.svg" />
+        <h4 class="app-name">developer</h4>
+      </div>
     </div>
     <div class="col-sm-4 d-flex justify-content-center">
       <div class="input-group search-container">
-        <span class="input-group-text searchbar" id="basic-addon1"><i class="bi bi-search"></i></span>
+        <span class="input-group-text searchbar" id="basic-addon1"
+          ><i class="bi bi-search"></i
+        ></span>
         <!-- <input type="search" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"> -->
         <input type="search" class="form-control input-search" />
       </div>
     </div>
     <div class="col-sm-4 d-flex align-items-center justify-content-end">
-     
       <!-- <input type="search" class="form-control input-search"/> -->
       <div class="d-flex align-items-center">
-        <mat-icon class="material-symbols-outlined profile-icon-size" (click)="openDialog()">account_circle</mat-icon>
+        <mat-icon
+          class="material-symbols-outlined profile-icon-size"
+          (click)="openDialog()"
+          >account_circle</mat-icon
+        >
         <img src="../../assets/images/Group 4.svg" />
       </div>
     </div>
-
   </mat-toolbar>
   <!-- <mat-toolbar color="primary">
         <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
@@ -29,7 +39,7 @@
         <h1>Responsive Material Sidenavigation</h1>
       </mat-toolbar> -->
   <mat-sidenav-container autosize class="example-sidenav-container">
-    <mat-sidenav [opened]="true" [mode]='sidebarView' class="sidenav-bg">
+    <mat-sidenav [opened]="true" [mode]="sidebarView" class="sidenav-bg">
       <mat-nav-list>
         <!-- <a mat-list-item>
                 <span class="entry">
@@ -38,30 +48,41 @@
                 </span>
              </a> -->
 
-             <a mat-list-item routerLink="apis" routerLinkActive="active">
-              <div class="d-flex align-items-center">
-                <span [ngClass]="{'mat-icon-styles': true, 'iconStyle': isCollapsed}">
-                  <mat-icon aria-hidden="false" aria-label="Example home icon" class="material-symbols-outlined"
-                    [ngClass]="{'mat-icon-override-style': isCollapsed}">
-                    settings
-                  </mat-icon> </span>
-                <span *ngIf="!isCollapsed" class="anchor-head">APIs</span>
-              </div>
-    
-            </a>
-            <a mat-list-item routerLink="api-products" routerLinkActive="active">
-              <div class="d-flex align-items-center">
-                <span [ngClass]="{'mat-icon-styles': true, 'iconStyle': isCollapsed}">
-                  <mat-icon aria-hidden="false" aria-label="Example home icon" class="material-symbols-outlined"
-                    [ngClass]="{'mat-icon-override-style': isCollapsed}">
-                    settings
-                  </mat-icon> </span>
-                <span *ngIf="!isCollapsed" class="anchor-head">API Products</span>
-              </div>
-    
-            </a>
-            
-        
+        <a mat-list-item routerLink="apis" routerLinkActive="active">
+          <div class="d-flex align-items-center">
+            <span
+              [ngClass]="{ 'mat-icon-styles': true, iconStyle: isCollapsed }"
+            >
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                class="material-symbols-outlined mat-icon-style"
+                [ngClass]="{ 'mat-icon-override-style': isCollapsed }"
+              >
+                settings
+              </mat-icon>
+            </span>
+            <span *ngIf="!isCollapsed" class="anchor-head">APIs</span>
+          </div>
+        </a>
+        <a mat-list-item routerLink="api-products" routerLinkActive="active">
+          <div class="d-flex align-items-center">
+            <span
+              [ngClass]="{ 'mat-icon-styles': true, iconStyle: isCollapsed }"
+            >
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                class="material-symbols-outlined mat-icon-style"
+                [ngClass]="{ 'mat-icon-override-style': isCollapsed }"
+              >
+                shop
+              </mat-icon>
+            </span>
+            <span *ngIf="!isCollapsed" class="anchor-head">API Products</span>
+          </div>
+        </a>
+
         <!-- <a mat-list-item routerLink="security" routerLinkActive="active">
                 <div class="d-flex align-items-center">
                     <span class="mat-icon-styles">

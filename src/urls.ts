@@ -1,9 +1,7 @@
 import { environment } from "./environments/environment"
 
-//  const host = "http://10.175.1.72:8082"
+//  const host = "http://10.175.1.110:31740"
 const host = environment.apiUrl
-// const host = process.env['NG_APP_API_HOST']
-
 export const urls = {
     saveGateway: host + "/krakend/saveKrakendJson",
     // addEndpoint:host+"/krakend/addendpoints",

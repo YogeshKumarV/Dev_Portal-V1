@@ -13,10 +13,14 @@
                 </div> -->
             </div>
         </div>
+        @if (isLoading) {
+            <app-loader></app-loader>
+        }@else {
         @if(applicationResults.length && applicationResults.length>0){
+            
         <div class="row mt-3 ">
             <div class="col-sm-12 overflow-cards">
-                <table mat-table [dataSource]="applicationResults" class="mat-elevation-z8">
+                <table mat-table [dataSource]="applicationResults" class="table-con">
                     <!-- clientId Column -->
                     <ng-container matColumnDef="clientId">
                         <th mat-header-cell *matHeaderCellDef> Client ID </th>
@@ -60,9 +64,10 @@
                             </div> -->
                         </td>
                     </ng-container>
+
      
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-header"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-rows"></tr>
                 </table>
             </div>
      
@@ -82,6 +87,7 @@
             </div>
         </div>
         }
+    }
      
     </div>
     }

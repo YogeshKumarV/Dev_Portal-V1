@@ -14,6 +14,8 @@ import { ApiProductsService } from '../services/api-products.service';
 })
 export class ApiProductsComponent {
 
+  isLoading = false;
+
    // displayedColumns: string[] = ['name', 'owner', 'policy', 'workstatus', 'subscriptions', 'actions'];
    displayedColumns: string[] = ['clientId', 'name', 'protocol', 'description', 'baseUrl', 'action'];
  
@@ -127,9 +129,12 @@ export class ApiProductsComponent {
    }
   
    applicationResults: any[] = []
+   
    getApplications() {
+    this.isLoading = true;
      this.applicationSrv.getApplication(this.consumerId, this.pageIndex, this.pageSize).subscribe({
        next: (res) => {
+        this.isLoading = false;
          console.log("result", res);
          this.applicationResults = res.applications
          this.length=res.totalRecords
@@ -137,6 +142,7 @@ export class ApiProductsComponent {
   
        },
        error: (err) => {
+        this.isLoading = false;
          console.log("error", err);
          if (err.error.code === 400) {
            this.applicationResults = []
@@ -147,11 +153,13 @@ export class ApiProductsComponent {
    }
   
    ngOnInit() {
+    this.isLoading = true;
 this.consumerId = localStorage.getItem('userid')
 
     this.applicationSrv.getApplication(this.consumerId, this.pageIndex, this.pageSize).subscribe({
       next: (res) => {
         console.log("result", res);
+        this.isLoading = false;
         this.applicationResults = res.applications
         this.length=res.totalRecords
         console.log("applicationResults", this.applicationResults);

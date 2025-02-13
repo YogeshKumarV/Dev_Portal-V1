@@ -12,6 +12,9 @@ export class ApiProductOverviewComponent {
   applicationId: any
   data: any
   applicationData: any
+  isTokenVisible: boolean = false;
+  isCopied = false;
+
 
   constructor(private router: Router, private route: ActivatedRoute,private applicationsrv:ApiProductsService) {
     // console.log("bbbbbbbbbbbbbbbbb",this.router?.getCurrentNavigation()?.extras.state);
@@ -28,6 +31,44 @@ export class ApiProductOverviewComponent {
 
   togglePasswordVisibility(): void {
     this.isPasswordVisible = !this.isPasswordVisible;
+  }
+  toggleTokenVisibility(): void {
+    this.isTokenVisible = !this.isTokenVisible;
+  }
+  copyInputMessage(inputElement: HTMLInputElement): void {
+    const textToCopy = inputElement.value.trim();
+
+    if (!textToCopy) {
+      alert('Nothing to copy! Please Generate the Access Token first, to copy.');
+      return;
+    }
+
+    // Create a temporary textarea element for copying
+    const textarea = document.createElement('textarea');
+    textarea.value = textToCopy;
+    document.body.appendChild(textarea);
+
+    // Select the text and copy it
+    textarea.select();
+    try {
+      const successful = document.execCommand('copy');
+      if (successful) {
+        // alert('Text copied to clipboard!');
+        this.isCopied = true
+        setTimeout(()=>{
+          this.isCopied = false
+        }
+        ,5000)
+        
+      } else {
+        alert('Failed to copy text. Please try again.');
+      }
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+      alert('Failed to copy text. Please try again.');
+    }
+    document.body.removeChild(textarea);
+    
   }
 
   ngOnInit() {

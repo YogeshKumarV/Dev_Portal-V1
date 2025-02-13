@@ -56,6 +56,7 @@ import { MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import { ViewApiProductsComponent } from './view-api-products/view-api-products.component';
 import { ApiProductOverviewComponent } from './api-product-overview/api-product-overview.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 
@@ -66,6 +67,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     keycloak.init({
       config: {
         realm: 'master',
+        // url: 'http://localhost:8080/',
         url: 'http://10.175.1.110:31438/',
         clientId: 'publisherportal',
 
@@ -117,7 +119,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     DocumentComponent,
     ApiProductsComponent,
     ViewApiProductsComponent,
-    ApiProductOverviewComponent
+    ApiProductOverviewComponent,
+    LoaderComponent
 
   ],
   imports: [

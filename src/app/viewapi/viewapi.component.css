@@ -78,3 +78,71 @@
 .active span{
   color: white;
 }
+.overall-card{
+  background-color: rgba(255, 255, 255, 1);
+  height: auto;
+  border: none; /* Remove default border */
+  /* border-radius: 10px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  */
+}
+.api-head{
+  font-size: 25px;
+  color:rgba(0, 0, 0, 0.76);
+}
+.api-para{
+  font-size: 12px;
+  color:rgba(0, 0, 0, 0.49);
+}
+.created-card{
+  height:70px;
+  width:100%;
+  border:1.5px solid rgba(56, 154, 99, 1);
+  border-radius:10px;
+  padding-left: 20px;
+}
+.created-card .head{
+  font-size: 10px;
+  color:rgba(0, 0, 0, 0.49);
+  margin-bottom: 0px;
+}
+.created-card .name{
+font-size: 16px;
+color: rgba(19, 134, 69, 0.76);
+margin-bottom: 0px;
+}
+
+.context-card{
+  height:70px;
+  width:100%;
+  border:1.5px solid rgba(188, 128, 95, 1);
+  border-radius:10px;
+  padding-left: 20px;
+}
+.context-card .head{
+  font-size: 10px;
+  color:rgba(0, 0, 0, 0.49);
+  margin-bottom: 0px;
+}
+.context-card .name{
+font-size: 16px;
+color: rgba(166, 88, 45, 0.76);
+margin-bottom: 0px;
+}
+
+.version-card{
+  height:70px;
+  width:100%;
+  border:1.5px solid rgba(130, 91, 221, 1);
+  border-radius:10px;
+  padding-left: 20px;
+}
+.version-card .head{
+  font-size: 10px;
+  color:rgba(0, 0, 0, 0.49);
+  margin-bottom: 0px;
+}
+.version-card .name{
+font-size: 16px;
+color: rgba(91, 40, 211, 0.76);
+margin-bottom: 0px;
+}

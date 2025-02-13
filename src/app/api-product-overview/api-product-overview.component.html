@@ -1,58 +1,100 @@
 <div class="container">
-    <div class="row">
-        <h3 class="heading-text">API Products Overview</h3>
-        <h4 class="sub-heading">Keys and IDs</h4>
-      </div>
-    <div class="row p-4">
+  <div class="row">
+    <h3 class="heading-text">API Products Overview</h3>
+    <h4 class="sub-heading">Keys and IDs</h4>
+  </div>
+  <div class="row p-4">
+    <div class="col-sm-5">
+      <div class="col-sm-12 d-flex">
+        <div class="col-sm-5 d-flex align-item-center">
+          <h3 class="heading-text">Consumer key</h3>
+        </div>
         <div class="col-sm-5">
-            <div class="col-sm-12 d-flex">
-              <div class="col-sm-5 d-flex align-item-center">
-                <h3 class="heading-text">Consumer key</h3>
-              </div>
-              <div class="col-sm-5">
-                <input
-                  type="text"
-                  class="form-control"
-                  style="border: none; color: rgba(91, 189, 102, 1)"
-                  id="id"
-                  [value]="applicationData?.clientId || ''"
-                  placeholder=""
-                  readonly
-                />
-               </div>
-            </div>
-            <div class="form-text">Consumer Key of the Application</div>
-          </div>
-      
-          
-      
-          <div class="col-sm-5">
-            <div class="col-sm-12 d-flex">
-              <div class="col-sm-5">
-                <h3 class="heading-text">Consumer Secret</h3>
-                  </div>
-              <div class="col-sm-5 d-flex">
-                <input
-                  type="{{ isPasswordVisible ? 'text' : 'password' }}"
-                  class="form-control"
-                  style="border: none; color: rgba(91, 189, 102, 1)"
-                  id="secret"
-                  [value]="applicationData?.secret || ''"
-                  placeholder=""
-                  readonly
-                />
-                <button
-                  type="button"
-                  class="btn btn-outline-secondary"
-                  style="border: none"
-                  (click)="togglePasswordVisibility()"
-                >
-                  <i [ngClass]="isPasswordVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
-                </button>
-              </div>
-            </div>
-            <div class="form-text">Consumer secret of the Application</div>
-          </div>
-       
+          <input
+            type="text"
+            class="form-control"
+            style="border: none; color: rgba(91, 189, 102, 1)"
+            id="id"
+            [value]="applicationData?.clientId || ''"
+            placeholder=""
+            readonly
+          />
+        </div>
+      </div>
+      <div class="form-text">Consumer Key of the Application</div>
     </div>
+
+    <div class="col-sm-5">
+      <div class="col-sm-12 d-flex">
+        <div class="col-sm-5">
+          <h3 class="heading-text">Consumer Secret</h3>
+        </div>
+        <div class="col-sm-5 d-flex">
+          <input
+            type="{{ isPasswordVisible ? 'text' : 'password' }}"
+            class="form-control"
+            style="border: none; color: rgba(91, 189, 102, 1)"
+            id="secret"
+            [value]="applicationData?.secret || ''"
+            placeholder=""
+            readonly
+          />
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            style="border: none"
+            (click)="togglePasswordVisibility()"
+          >
+            <i [ngClass]="isPasswordVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
+          </button>
+        </div>
+      </div>
+      <div class="form-text">Consumer secret of the Application</div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <div class="row mt-5">
+        <div class="col-sm-5">
+          <h3 class="heading-text">API-Key</h3>
+        </div>
+        <div class="col-sm-9">
+          <div class="d-flex access-token-container">
+            <input
+              type="{{ isTokenVisible ? 'text' : 'password' }}"
+              class="form-control"
+              style="
+                border: none;
+                width: 100%;
+                color: rgba(91, 189, 102, 1);
+                background-color: rgba(247, 247, 247, 1);
+              "
+              id="token"
+              [value]="applicationData?.apiKey || ''"
+              placeholder=""
+              readonly
+              #userinput
+            />
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              style="border: none"
+              (click)="copyInputMessage(userinput)"
+            >
+              <i
+                class=""
+                [ngClass]="!isCopied ? 'bi bi-copy' : 'bi bi-check tick'"
+              ></i>
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              style="border: none"
+              (click)="toggleTokenVisibility()"
+            >
+              <i [ngClass]="isTokenVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

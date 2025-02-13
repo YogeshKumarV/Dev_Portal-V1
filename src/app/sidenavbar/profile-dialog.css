@@ -7,10 +7,13 @@ ul li:hover{
     cursor: pointer;
 }
 .profile-card{
-    height:180px;
+    height:200px;
     width:250px;
     padding: 0px !important;
 }
 .svg-margin{
     margin-left:5px;
+}
+.header-padding{
+    margin-bottom:0px;
 }

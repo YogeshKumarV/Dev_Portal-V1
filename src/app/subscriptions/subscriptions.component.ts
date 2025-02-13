@@ -17,6 +17,7 @@ import { ApiProductsService } from '../services/api-products.service';
   styleUrl: './subscriptions.component.css'
 })
 export class SubscriptionsComponent {
+  isLoading = false;
   private showSubscriptionApplicationsSubscription!: Subscription; // To track the subscription
 
   length !: number;
@@ -42,6 +43,7 @@ export class SubscriptionsComponent {
     console.log("********pageSize", this.pageSize);
     const userId = localStorage.getItem('userid')
     if (userId) {
+      this.isLoading = true;
       this.loadCards()
     }
 
@@ -72,6 +74,7 @@ export class SubscriptionsComponent {
     this.mainSer.getEndpointCards(this.pageIndex, this.pageSize).subscribe({
       next: (res: any) => {
         console.log(res);
+        this.isLoading = false;
         this.apiCards.data = res.apiCards
         this.length = res.totalRecords
         // this.filteredEndpointCards.data = this.apiCards.filter(
@@ -81,6 +84,7 @@ export class SubscriptionsComponent {
         console.log("subscriptions:", this.apiCards);
       },
       error: (err) => {
+        this.isLoading = false;
         console.error(err);
         // this.showError(err?.error?.message);
         // this.isShowNoApisCard=true
@@ -90,6 +94,7 @@ export class SubscriptionsComponent {
 
   ngOnInit() {
     const userId = localStorage.getItem('userid')
+    this.isLoading = true;
     this.loadCards()
 
     // this.showSubscriptionApplicationsSubscription = this.communicationsrv.showSubscriptionApplications$.subscribe(() => {

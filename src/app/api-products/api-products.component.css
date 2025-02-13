@@ -8,6 +8,55 @@
     overflow-y: auto;
     margin-bottom: 80px;
 } */
+
+/* Apply border-radius to the entire mat-table */
+.mat-mdc-table {
+    border: 1px solid rgba(54, 50, 50, 0.16);
+    border-radius: 4px;
+    overflow: hidden; /* Ensures rounded corners work */
+  }
+  
+  /* Remove border-collapse to allow border-radius */
+  .mat-mdc-table,
+  .mat-mdc-table thead,
+  .mat-mdc-table tbody {
+    border-collapse: separate !important;
+    border-spacing: 0; /* Ensures no gaps between cells */
+  }
+ 
+/* Apply border-radius to the first and last row */
+.mat-mdc-table tbody tr:first-child td:first-child {
+    border-top-left-radius: 20px;
+  }
+  .mat-mdc-table tbody tr:first-child td:last-child {
+    border-top-right-radius: 20px;
+  }
+  .mat-mdc-table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 20px;
+  }
+  .mat-mdc-table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 20px;
+  }
+
+.table-header{
+    background-color: rgba(199, 207, 255, 1);
+    height: 40px;
+  }
+  
+  .table-header th{
+    color: rgba(0, 0, 0, 0.68);
+    font-weight: 400;
+  
+  }
+  
+  
+  .table-header tr{
+    color: rgba(0, 0, 0, 0.75);
+  }
+  
+  .table-rows{
+    height: 40px;
+  }
  
 .mat-mdc-paginator.demo-paginator {
     position: fixed;

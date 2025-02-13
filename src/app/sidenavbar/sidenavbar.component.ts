@@ -21,6 +21,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MainService } from '../services/main.service';
 
 /** @title Responsive sidenav */
 @Component({
@@ -154,8 +155,23 @@ export class DialogOverviewExampleDialog {
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private readonly keyClokService:KeycloakService
+    private readonly keyClokService:KeycloakService,
+    private mainSer:MainService
   ) {}
+  userId=localStorage.getItem('userid')
+  userDetails:any;
+  ngOnInit(){
+    this.getUserDetails();
+    
+  }
+  getUserDetails(){
+this.mainSer.getUserDetails(this.userId).subscribe({
+  next:(res)=>{
+    console.log(res);
+    this.userDetails=res;
+  }
+})
+  }
   logout(){
     localStorage.clear();
     this.keyClokService.logout();

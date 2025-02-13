@@ -69,9 +69,15 @@ export class ApicardsComponent implements OnInit , AfterViewInit{
       this.isShowParent = value;
       console.log('showParent updated to:', this.isShowParent);
     });
+    this.loadCards();
   }
 
   loadCards() {
+    if (!this.userId) {
+    console.error('User ID is not available');
+    return;
+  }
+
     this.mainSer.getEndpointCards(0,10).subscribe({
       next: (res: any) => {
         console.log(res);

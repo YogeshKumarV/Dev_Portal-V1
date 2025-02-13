@@ -8,6 +8,12 @@ import { CommunicationService } from '../services/communication.service';
 import { urls } from '../../urls';
 import { ApiOverviewService } from '../services/api-overview.service';
 
+import * as bcrypt from 'bcryptjs';
+
+
+
+
+
 @Component({
   selector: 'app-try-it',
   templateUrl: './try-it.component.html',
@@ -15,7 +21,7 @@ import { ApiOverviewService } from '../services/api-overview.service';
 })
 export class TryItComponent implements AfterViewInit {
 
-  
+  isLoading = false;
 
   receivedData: any;
   
@@ -25,8 +31,18 @@ export class TryItComponent implements AfterViewInit {
   userId:any = localStorage.getItem('userid')
   applicationId: any;
 
+  isOAuth2: boolean = false;
+  isAuthBasic: boolean = false;
+  isApikey: boolean = false;
+
+
   isPasswordVisible: boolean = false;
   isTokenVisible: boolean = false;
+  isUsernameValid: boolean = false;
+  isMatch: boolean = false;
+  basicUser:any;
+  apiKey:any;
+  encodedPassword:any;
 
   isCopied = false;
 
@@ -92,13 +108,33 @@ export class TryItComponent implements AfterViewInit {
   accessToken: any;
   username: string = ''; // Store username for basic authentication
 password: string = ''; // Store password for basic authentication
+
+validatePassword(): void {
+  // Example: if password matches the predefined one
+  const correctPassword = 'password123'; // Example password
+  if (bcrypt.compareSync(this.password, this.encodedPassword)) {
+    this.isMatch = true;
+  } else {
+    this.isMatch = false;
+  }
+}
 enterUserDeatils(){
   if (!this.username || !this.password) {
     alert('Please enter both username and password.');
     return;
   }
+    if (this.isMatch) {
+      console.log('Password matches the hash!');
+      this.renderSwaggerUIWithBasicAuth(this.username, this.password);
+    } else {
+      alert('password did not match');
+      return;
+    }
   // alert(`Username: ${this.username}, Password: ${this.password}`);
-  this.renderSwaggerUIWithBasicAuth(this.username, this.password);
+  
+}
+tryItWithApiKey(){
+  this.renderSwaggerUIForApiKey(this.apiKey)
 }
   getKey(){
     
@@ -119,9 +155,7 @@ enterUserDeatils(){
     );
   }
   
-  ngAfterViewInit(): void {
-    
-  } 
+  ngAfterViewInit(): void {  } 
 
   private fetchAccessTokenFromService(){
     const headers:any = {
@@ -148,6 +182,20 @@ enterUserDeatils(){
     });
   }
 
+  private renderSwaggerUIForApiKey(key: string): void {
+    
+    
+    SwaggerUI({
+      dom_id: '#swagger-ui',
+      spec: JSON.parse(this.jsonData),
+      layout: "BaseLayout",
+      requestInterceptor: (req) => {
+        req['headers']['Authorization'] = `${key}`;
+        return req;
+      }
+    });
+  }
+
   jsonData:any;
   private renderSwaggerUIWithBasicAuth(username: string, password: string): void {
     SwaggerUI({
@@ -168,29 +216,63 @@ enterUserDeatils(){
   tokenFromLocalStorage: any;
 
   ngOnInit(): void {
+    this.isLoading = true;
 
     this.tokenFromLocalStorage = localStorage.getItem('token')
     console.log(this.tokenFromLocalStorage)
     this.overviewService.getEndPointDetails(this.paramId).subscribe({
       next: (res: any) => {
-         console.log(res);
-         this.apiDataFromOverview=res;
-        this.communicate.setApiData(res)
-        if(this.apiDataFromOverview){
+        this.isLoading = false;
+        console.log(res);
+        this.apiDataFromOverview = res;
+        this.applicationId = this.apiDataFromOverview?.ekeyClockClient?.id;
+        console.log(this.applicationId)
+        // this.communicate.setApiData(res);
+    
+        if (this.apiDataFromOverview?.authBasic?.users) {
+          this.isAuthBasic = true;
+          // Extracting consumer1 and storing in basicUser
+          const [basicUser, encodedPassword] = Object.entries(this.apiDataFromOverview.authBasic.users)[0];
+    
+          // Assigning values
+          this.username = basicUser;
+          this.encodedPassword = encodedPassword;
+    
+          console.log('Basic User:', this.basicUser);
+          console.log('Encoded Password (BCrypt):', this.encodedPassword);
+        }
+        if (this.apiDataFromOverview?.authValidator){
+          this.isOAuth2 = true;
+          console.log(this.isOAuth2);
+        }
+
+        if(this.apiDataFromOverview?.authApiKeys){
+          this.isApikey = true;
+          this.apiKey = this.apiDataFromOverview?.authApiKeys?.keys[0]?.key;
+          console.log(this.apiKey);
+        }
+
+    
+        if (this.apiDataFromOverview) {
           this.tryItServices.getSwaggerSpecFile(this.apiDataFromOverview?.id).subscribe(
             (response) => {
               this.jsonData = JSON.stringify(response);
               console.log('Response:', this.jsonData);
+              
             },
             (error) => {
+              this.isLoading = false;
               console.error('Error:', error); // Handle errors
             }
-          )
+          );
         }
-      
-        // console.log(this.apiData);
+      },
+      error: (error) => {
+        this.isLoading = false;
+        console.error('Error fetching endpoint details:', error);
       }
-    })
+    });
+    
   
     this.communicate.getApiData$().subscribe((data:any)=>{
       console.log(data);
@@ -206,6 +288,8 @@ enterUserDeatils(){
       this.paramId = params.get('id');
       
     });
+
+
     
     //  this.openApiUrl = urls.openApiSpecFileGetting+`?apiId=${this.apiDataFromOverview?.id}`;
 
@@ -213,6 +297,8 @@ enterUserDeatils(){
     
     
     // this.renderSwaggerUI(this.accessToken);
+
+    
     
   }
 
