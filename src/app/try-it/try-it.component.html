@@ -1,10 +1,15 @@
+@if (isLoading) {
+<app-loader></app-loader>
+} @else {
 <div class="container">
-  <div class="row">
+  <!-- <div class="row">
     <h3 class="heading-text">Tryit</h3>
     <h4 class="sub-heading">Try out your api here.</h4>
-  </div>
+  </div> -->
 
-  <div class="row mt-4" *ngIf="!(apiDataFromOverview?.authBasic != null)">
+  
+
+  <div class="row mt-4">
     <div class="col-sm-5">
       <div class="col-sm-12 d-flex">
         <div class="col-sm-5 d-flex align-item-center">
@@ -53,7 +58,7 @@
       <div class="form-text">Consumer secret of the Application</div>
     </div>
 
-    <div class="row mt-5" *ngIf="!(apiDataFromOverview?.authBasic != null)">
+    <div class="row mt-5" *ngIf="isOAuth2">
       <div class="col-sm-12 col-md-6">
         <div class="row">
           <label for="token" class="form-label">Generate Access Token</label>
@@ -104,7 +109,7 @@
     </div>
   </div>
 
-  <div class="row mt-4" *ngIf="apiDataFromOverview?.authBasic != null">
+  <div class="row mt-4" *ngIf="isAuthBasic">
     <h4>Basic Authentication</h4>
     <div class="col-sm-4 d-flex flex-column justify-content-between">
       <!-- <label for="clientId" class="form-label">Client ID</label> -->
@@ -114,8 +119,8 @@
           class="form-control"
           style="border: none; background-color: rgba(247, 247, 247, 1)"
           id="id"
-          [(ngModel)]="username"
-          placeholder="userName"
+          [value]="username"
+          readonly
         />
       </div>
       <div class="form-text">User Name</div>
@@ -131,6 +136,9 @@
           id="secret"
           [(ngModel)]="password"
           placeholder="password"
+          #passwordField="ngModel"
+          (ngModelChange)="validatePassword()"
+          [class.invalid]="passwordField.invalid && passwordField.touched"
         />
         <button
           type="button"
@@ -151,9 +159,62 @@
     </div>
   </div>
 
+  <div class="row mt-4" *ngIf="isApikey">
+    <div class="col-sm-12 col-md-6">
+      <div class="row">
+        <div class="col-sm-5">
+          <h3 class="heading-text">API-Key</h3>
+        </div>
+        <div class="col-sm-8">
+          <div class="d-flex access-token-container">
+            <input
+              type="{{ isTokenVisible ? 'text' : 'password' }}"
+              class="form-control"
+              style="
+                border: none;
+                width: 100%;
+                background-color: rgba(247, 247, 247, 1);
+              "
+              id="token"
+              [value]="apiKey"
+              placeholder=""
+              readonly
+              #userinput
+            />
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              style="border: none"
+              (click)="copyInputMessage(userinput)"
+            >
+              <i
+                class=""
+                [ngClass]="!isCopied ? 'bi bi-copy' : 'bi bi-check tick'"
+              ></i>
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              style="border: none"
+              (click)="toggleTokenVisibility()"
+            >
+              <i [ngClass]="isTokenVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <button class="access-token-button" (click)="tryItWithApiKey()">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row mb-5" style="background-color: white">
     <div class="col-sm-12">
       <div id="swagger-ui"></div>
     </div>
   </div>
 </div>
+}
